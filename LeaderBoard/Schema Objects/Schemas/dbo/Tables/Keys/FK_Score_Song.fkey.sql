@@ -1,3 +1,0 @@
-﻿ALTER TABLE [dbo].[Score]
-    ADD CONSTRAINT [FK_Score_Song] FOREIGN KEY ([SongId]) REFERENCES [dbo].[Song] ([SongId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
-

@@ -1,8 +1,0 @@
-D:\Code\MyCode\CurrentLeaderBoards\LeaderBoard\sql\release\LeaderBoard_Script.PreDeployment.sql
-D:\Code\MyCode\CurrentLeaderBoards\LeaderBoard\sql\release\LeaderBoard_Script.PostDeployment.sql
-D:\Code\MyCode\CurrentLeaderBoards\LeaderBoard\sql\release\LeaderBoard_Database.sqlsettings
-D:\Code\MyCode\CurrentLeaderBoards\LeaderBoard\sql\release\LeaderBoard_Database.sqldeployment
-D:\Code\MyCode\CurrentLeaderBoards\LeaderBoard\sql\release\LeaderBoard_Database.sqlcmdvars
-D:\Code\MyCode\CurrentLeaderBoards\LeaderBoard\sql\release\LeaderBoard.deploymanifest
-D:\Code\MyCode\CurrentLeaderBoards\LeaderBoard\sql\release\LeaderBoard.dbschema
-D:\Code\MyCode\CurrentLeaderBoards\LeaderBoard\obj\Release\LeaderBoard.dbschema
