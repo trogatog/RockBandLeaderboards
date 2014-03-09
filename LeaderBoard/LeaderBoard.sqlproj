@@ -5,9 +5,13 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
     <VisualStudioVersion Condition="'$(SSDTExists)' == ''">10.0</VisualStudioVersion>
-    <PostConversionRemoveFromScc>;C:\Code\MyCode\CurrentLeaderBoards\LeaderBoard\Properties\Database.sqldeployment;C:\Code\MyCode\CurrentLeaderBoards\LeaderBoard\Properties\Database.sqlsettings;Properties\Database.sqlsettings;Properties\Database.sqldeployment;Properties\Database.sqlcmdvars;Properties\Database.sqlpermissions;Schema Objects\Database Level Objects\Storage\Files\LeaderBoard_log.sqlfile.sql;Schema Objects\Database Level Objects\Storage\Files\LeaderBoard.sqlfile.sql;C:\Code\MyCode\CurrentLeaderBoards\LeaderBoard\LeaderBoard.dbproj</PostConversionRemoveFromScc>
-    <PostConversionAddToScc>;C:\Code\MyCode\CurrentLeaderBoards\LeaderBoard\Release.publish.xml;C:\Code\MyCode\CurrentLeaderBoards\LeaderBoard\Debug.publish.xml;C:\Code\MyCode\CurrentLeaderBoards\LeaderBoard\Permissions.sql;C:\Code\MyCode\CurrentLeaderBoards\LeaderBoard\LeaderBoard.sqlproj</PostConversionAddToScc>
-    <PostConversionCheckOutFromScc>;C:\Code\MyCode\CurrentLeaderBoards\LeaderBoard\Schema Comparisons\CurrentSchema.scmp</PostConversionCheckOutFromScc>
+    <PostConversionRemoveFromScc>
+    </PostConversionRemoveFromScc>
+    <PostConversionAddToScc>
+    </PostConversionAddToScc>
+    <PostConversionCheckOutFromScc>
+    </PostConversionCheckOutFromScc>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>

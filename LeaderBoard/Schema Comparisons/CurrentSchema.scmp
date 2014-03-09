@@ -3,16 +3,13 @@
   <Version>10</Version>
   <SourceModelProvider>
     <ProjectBasedModelProvider>
-      <ProjectGuid>{155f8663-01da-4f77-bc99-9694da0f65cf}</ProjectGuid>
+      <ProjectGuid>{e859baf4-199c-4f91-bac9-67897f6996e4}</ProjectGuid>
       <Name>LeaderBoard</Name>
     </ProjectBasedModelProvider>
   </SourceModelProvider>
   <TargetModelProvider>
     <ConnectionBasedModelProvider>
-      <ConnectionString>Data Source=(local);Initial Catalog=LeaderBoard;Integrated Security=True;Password=</ConnectionString>
-      <DatabaseName>LeaderBoard</DatabaseName>
-      <DspFamilyName>sql</DspFamilyName>
-      <Name>[MARKV-CC.LeaderBoard]</Name>
+      <ConnectionString>Data Source=.;Initial Catalog=Leaderboards;Integrated Security=True;Pooling=False</ConnectionString>
     </ConnectionBasedModelProvider>
   </TargetModelProvider>
   <SchemaCompareSettingsService>
@@ -24,19 +21,87 @@
     </SchemaCompareSettingsService>
     <ConfigurationOptionsElement>
       <PropertyElementName>
-        <Name>SqlDeploymentOptions</Name>
-        <Value>Sql100SchemaDeploymentOptions</Value>
+        <Name>PlanGenerationType</Name>
+        <Value>SqlDeploymentOptions</Value>
       </PropertyElementName>
       <PropertyElementName>
-        <Name>IgnoreCryptographicProviderFilePath</Name>
-        <Value>True</Value>
+        <Name>AllowExistingModelErrors</Name>
+        <Value>False</Value>
       </PropertyElementName>
       <PropertyElementName>
-        <Name>NoAlterStatementsToChangeCLRTypes</Name>
+        <Name>AllowIncompatiblePlatform</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>BackupDatabaseBeforeChanges</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>BlockOnPossibleDataLoss</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>BlockWhenDriftDetected</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>CompareUsingTargetCollation</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>CommentOutSetVarDeclarations</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>CreateNewDatabase</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>DeployDatabaseInSingleUserMode</Name>
         <Value>False</Value>
       </PropertyElementName>
       <PropertyElementName>
         <Name>DisableAndReenableDdlTriggers</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>DoNotAlterChangeDataCaptureObjects</Name>
+        <Value>True</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>DoNotAlterReplicatedObjects</Name>
+        <Value>True</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>DropConstraintsNotInSource</Name>
+        <Value>True</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>DropDmlTriggersNotInSource</Name>
+        <Value>True</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>DropExtendedPropertiesNotInSource</Name>
+        <Value>True</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>DropIndexesNotInSource</Name>
+        <Value>True</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>DropPermissionsNotInSource</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>DropObjectsNotInSource</Name>
+        <Value>True</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>DropRoleMembersNotInSource</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>GenerateSmartDefaults</Name>
         <Value>False</Value>
       </PropertyElementName>
       <PropertyElementName>
@@ -64,23 +129,7 @@
         <Value>True</Value>
       </PropertyElementName>
       <PropertyElementName>
-        <Name>OnlyCompareElementsInSource</Name>
-        <Value>False</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>IgnoreStatisticsSample</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>CommentOutSetVarDeclarations</Name>
-        <Value>False</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>GenerateDeployStateChecks</Name>
-        <Value>False</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>DeployDatabaseProperties</Name>
+        <Name>IgnoreCryptographicProviderFilePath</Name>
         <Value>True</Value>
       </PropertyElementName>
       <PropertyElementName>
@@ -98,30 +147,6 @@
       <PropertyElementName>
         <Name>IgnoreSemicolonBetweenStatements</Name>
         <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>BlockOnPossibleDataLoss</Name>
-        <Value>False</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>BackupDatabaseBeforeChanges</Name>
-        <Value>False</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>DeployDatabaseInSingleUserMode</Name>
-        <Value>False</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>IncludeTransactionalScripts</Name>
-        <Value>False</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>EnforceMinimalDependencies</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>DeploymentCollationPreference</Name>
-        <Value>UseSourceModelCollation</Value>
       </PropertyElementName>
       <PropertyElementName>
         <Name>IgnorePartitionSchemes</Name>
@@ -172,10 +197,6 @@
         <Value>False</Value>
       </PropertyElementName>
       <PropertyElementName>
-        <Name>ScriptDatabaseCollation</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
         <Name>IgnoreDmlTriggerState</Name>
         <Value>False</Value>
       </PropertyElementName>
@@ -190,10 +211,6 @@
       <PropertyElementName>
         <Name>IgnoreUserSettingsObjects</Name>
         <Value>False</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>AbortOnFirstError</Name>
-        <Value>True</Value>
       </PropertyElementName>
       <PropertyElementName>
         <Name>IgnoreFilegroupPlacement</Name>
@@ -220,71 +237,51 @@
         <Value>True</Value>
       </PropertyElementName>
       <PropertyElementName>
-        <Name>OverrideSevenSetOptions</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>SetAnsiNulls</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>SetAnsiPadding</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>SetAnsiWarnings</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>SetArithAbort</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>SetConcatNullYieldsNull</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>SetQuotedIdentifier</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>SetNumericRoundAbort</Name>
+        <Name>IncludeCompositeObjects</Name>
         <Value>False</Value>
       </PropertyElementName>
       <PropertyElementName>
-        <Name>UnmodifiableObjectWarnings</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>DropIndexesNotInSource</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>DropConstraintsNotInSource</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>CheckNewConstraints</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>IgnoreColumnOrder</Name>
+        <Name>IncludeTransactionalScripts</Name>
         <Value>False</Value>
       </PropertyElementName>
       <PropertyElementName>
-        <Name>IgnorePasswords</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>IgnoreBodyDependencies</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>CreateNewDatabase</Name>
+        <Name>NoAlterStatementsToChangeCLRTypes</Name>
         <Value>False</Value>
       </PropertyElementName>
       <PropertyElementName>
-        <Name>DropObjectsNotInSource</Name>
+        <Name>PopulateFilesOnFileGroups</Name>
+        <Value>True</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>RegisterDataTierApplication</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>ScriptDatabaseCollation</Name>
+        <Value>True</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>ScriptDatabaseCompatibility</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>ScriptDatabaseOptions</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>ScriptDeployStateChecks</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>ScriptFileSize</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>ScriptNewConstraintValidation</Name>
+        <Value>True</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>ScriptRefreshModule</Name>
         <Value>True</Value>
       </PropertyElementName>
       <PropertyElementName>
@@ -296,16 +293,28 @@
         <Value>Data Source=(local);Initial Catalog=LeaderBoard;Integrated Security=True;Pooling=False</Value>
       </PropertyElementName>
       <PropertyElementName>
-        <Name>VerifyDeployment</Name>
-        <Value>True</Value>
-      </PropertyElementName>
-      <PropertyElementName>
         <Name>TreatVerificationErrorsAsWarnings</Name>
         <Value>False</Value>
       </PropertyElementName>
       <PropertyElementName>
-        <Name>BuildtimeContributorsMustExist</Name>
+        <Name>UnmodifiableObjectWarnings</Name>
         <Value>True</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>VerifyCollationCompatibility</Name>
+        <Value>True</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>VerifyDeployment</Name>
+        <Value>True</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>RunDeploymentPlanExecutors</Name>
+        <Value>False</Value>
+      </PropertyElementName>
+      <PropertyElementName>
+        <Name>AllowDropBlockingAssemblies</Name>
+        <Value>False</Value>
       </PropertyElementName>
       <PropertyElementName>
         <Name>Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlPermissionStatement</Name>
@@ -317,5 +326,9 @@
       </PropertyElementName>
     </ConfigurationOptionsElement>
   </SchemaCompareSettingsService>
-  <SchemaCompareViewSettings />
+  <SchemaCompareViewSettings>
+    <GroupBy>2</GroupBy>
+    <ZoomLevel>100</ZoomLevel>
+    <Filter>Equals_Objects,Not_Supported_Deploy</Filter>
+  </SchemaCompareViewSettings>
 </SchemaComparison>
