@@ -1,0 +1,1 @@
+"C:\Program Files\Microsoft SDKs\Windows\v6.0A\bin\SqlMetal.exe" /server:(local) /database:LeaderBoard  /map:map.xml /code:Model.cs /language:csharp /namespace:CurrentLeaderBoards.Model
