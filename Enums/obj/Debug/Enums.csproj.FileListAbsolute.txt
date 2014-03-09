@@ -1,5 +1,0 @@
-D:\Code\MyCode\CurrentLeaderBoards\Enums\obj\Debug\ResolveAssemblyReference.cache
-D:\Code\MyCode\CurrentLeaderBoards\Enums\bin\Debug\DownloadLeaderBoards.Enums.dll
-D:\Code\MyCode\CurrentLeaderBoards\Enums\bin\Debug\DownloadLeaderBoards.Enums.pdb
-D:\Code\MyCode\CurrentLeaderBoards\Enums\obj\Debug\DownloadLeaderBoards.Enums.dll
-D:\Code\MyCode\CurrentLeaderBoards\Enums\obj\Debug\DownloadLeaderBoards.Enums.pdb
