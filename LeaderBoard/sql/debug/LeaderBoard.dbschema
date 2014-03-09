@@ -1,0 +1,3318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataSchemaModel FileFormatVersion="1.2" SchemaVersion="1.1" DspName="Microsoft.Data.Schema.Sql.Sql100DatabaseSchemaProvider" CollationLcid="1033" CollationCaseSensitive="False">
+	<Header>
+		<CustomData Category="ModelCapability">
+			<Metadata Name="ModelCapability" Value="Default" />
+		</CustomData>
+		<CustomData Category="ClrTypesDbSchema" Type="DbSchema">
+			<Metadata Name="ClrTypesDbSchema" Value="True" />
+		</CustomData>
+		<CustomData Category="AnsiNulls">
+			<Metadata Name="AnsiNulls" Value="False" />
+		</CustomData>
+		<CustomData Category="QuotedIdentifier">
+			<Metadata Name="QuotedIdentifier" Value="False" />
+		</CustomData>
+		<CustomData Category="CompatibilityMode">
+			<Metadata Name="CompatibilityMode" Value="100" />
+		</CustomData>
+		<CustomData Category="Permissions" Type="XmlPermissions">
+			<Metadata Name="FileName" Value="D:\CODE\MYCODE\CURRENTLEADERBOARDS\LEADERBOARD\PROPERTIES\DATABASE.SQLPERMISSIONS" />
+		</CustomData>
+	</Header>
+	<Model>
+		<Element Type="ISql100DatabaseOptions">
+			<Property Name="Collation" Value="SQL_Latin1_General_CP1_CI_AS" />
+			<Property Name="IsAnsiPaddingOn" Value="False" />
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="IsCursorDefaultScopeGlobal" Value="True" />
+			<Property Name="IsTornPageProtectionOn" Value="False" />
+			<Property Name="IsFullTextEnabled" Value="True" />
+			<Relationship Name="DefaultFilegroup">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90Route" Name="[AutoCreatedLocal]">
+			<Property Name="Address" Value="LOCAL" />
+			<Relationship Name="Authorizer">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100UniqueConstraint" Name="[dbo].[CK_OnlineName_Platform]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Player].[OnlineName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Player].[PlatformId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Player]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Filegroup">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90CheckConstraint" Name="[dbo].[CK_Score_StarScoreBetween0and6]">
+			<Property Name="CheckExpressionScript">
+				<Value><![CDATA[[StarScore]>(0) AND [StarScore]<=(6) OR [StarScore] IS NULL]]></Value>
+			</Property>
+			<Relationship Name="CheckExpressionDependencies">
+				<Entry>
+					<References Name="[dbo].[Score].[StarScore]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Score]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[CleanFailedSongAcquire]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+BEGIN
+	UPDATE s1 SET LastUpdatedDate = '1/1/1900'
+	FROM Song s1 
+	INNER JOIN Song s2 on s1.LastUpdatedDate = s2.LastUpdatedDate
+	AND s1.SongId <> s2.SongId
+	AND s1.LastUpdatedDate < DATEADD(hh,-1,GETDATE())
+END]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Song]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[LastUpdatedDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[LastUpdatedDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[LastUpdatedDate]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="261" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE CleanFailedSongAcquire&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql90DefaultConstraint" Name="[dbo].[DF_Score_ObsoleteScore]">
+			<Property Name="DefaultExpressionScript">
+				<Value><![CDATA[((0))]]></Value>
+			</Property>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Score]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForColumn">
+				<Entry>
+					<References Name="[dbo].[Score].[ObsoleteScore]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90DefaultConstraint" Name="[dbo].[DF_SongStage_LastUpdatedDate]">
+			<Property Name="DefaultExpressionScript">
+				<Value><![CDATA[('1/1/1900')]]></Value>
+			</Property>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[SongStage]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForColumn">
+				<Entry>
+					<References Name="[dbo].[SongStage].[LastUpdatedDate]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Table" Name="[dbo].[Difficulty]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Difficulty].[DifficultyId]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Difficulty].[Description]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Difficulty].[SmallDescription]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="1" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[char]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90ForeignKeyConstraint" Name="[dbo].[FK_Player_Platform]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[Player].[PlatformId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Player]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[Platform].[PlatformId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[Platform]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90ForeignKeyConstraint" Name="[dbo].[FK_Score_Difficulty]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[Score].[DifficultyId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Score]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[Difficulty].[DifficultyId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[Difficulty]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90ForeignKeyConstraint" Name="[dbo].[FK_Score_Game]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[Score].[GameId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Score]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[Game].[GameId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[Game]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90ForeignKeyConstraint" Name="[dbo].[FK_Score_Instrument]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[Score].[InstrumentId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Score]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[Instrument].[InstrumentId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[Instrument]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90ForeignKeyConstraint" Name="[dbo].[FK_Score_Player]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[Score].[PlayerId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Score]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[Player].[PlayerId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[Player]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90ForeignKeyConstraint" Name="[dbo].[FK_Score_Song]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[Score].[SongId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Score]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[Song].[SongId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[Song]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90ForeignKeyConstraint" Name="[dbo].[FK_SongInstrumentDifficulty_Instrument]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[SongInstrumentDifficulty].[InstrumentId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[SongInstrumentDifficulty]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[Instrument].[InstrumentId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[Instrument]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90ForeignKeyConstraint" Name="[dbo].[FK_SongInstrumentDifficulty_Song]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[SongInstrumentDifficulty].[SongId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[SongInstrumentDifficulty]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[Song].[SongId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[Song]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Table" Name="[dbo].[Game]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Game].[GameId]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Game].[GameName]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Game].[ShortName]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="5" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[InsertNewScoresBySongShortName]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+BEGIN
+DECLARE @UnstagedRecords Table
+(
+	Id INT
+)
+
+DECLARE @ObsoleteScore Table
+(
+	Id INT
+)
+DECLARE @OldSongDisplayName varchar(50)
+	SET NOCOUNT ON;
+	
+INSERT INTO Player(OnlineName, PlatformId)
+SELECT PlayerName, PlatformId FROM ScoreStage ss
+WHERE NOT EXISTS (SELECT 1 FROM Player p WHERE p.OnlineName = ss.PlayerName AND p.PlatformId = ss.PlatformId)
+	
+INSERT INTO @UnstagedRecords(Id)
+SELECT ScoreStageId FROM ScoreStage ss 
+INNER JOIN Player p on ss.PlayerName = p.OnlineName
+AND ss.PlatformId = p.PlatformId
+WHERE ss.SongShortName = @SongShortName
+AND NOT EXISTS(
+	SELECT 1 FROM Score sc
+	inner join Song s on sc.SongId = sc.SongId
+	WHERE sc.PlayerId = p.PlayerId 
+	AND sc.InstrumentId = ss.InstrumentId
+	AND sc.Score = ss.Score
+	and s.ShortName = ss.SongShortName)
+	
+
+INSERT INTO Score(GameId, SongId, InstrumentId, Score, StarScore, Percentage, PlayerId, DifficultyId, ScoreAddedDate)
+(SELECT GameId, s.SongId, InstrumentId, Score, StarScore, Percentage, p.PlayerId, DifficultyId, GETDATE()
+ FROM ScoreStage ss inner join @UnstagedRecords ur on ss.ScoreStageId = ur.Id
+ INNER JOIN Player p on ss.PlayerName = p.OnlineName AND ss.PlatformId = p.PlatformId
+ INNER JOIN Song s on s.ShortName = ss.SongShortName)
+
+UPDATE s1 set ObsoleteScore = 1, Ranking = NULL
+FROM Score s1 
+INNER JOIN Score s2 on s1.PlayerId = s2.PlayerId 
+inner join Song so on s1.SongId = so.SongId
+AND s1.Score < s2.Score
+AND s1.InstrumentId = s2.InstrumentId
+AND s1.SongId = s2.SongId
+AND s1.ObsoleteScore <> 1
+and so.ShortName = @SongShortName
+
+DELETE FROM ScoreStage WHERE SongShortName = @SongShortName
+
+EXEC dbo.UpdateRankings @SongShortName
+END]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[OnlineName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[PlatformId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[PlayerName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[PlatformId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[OnlineName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[PlayerName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[PlatformId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[PlatformId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[InsertNewScoresBySongShortName].[@UnstagedRecords].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[PlayerName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[OnlineName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[PlatformId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[PlatformId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[ScoreStageId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[SongShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[InsertNewScoresBySongShortName].[@SongShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[PlayerId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[PlayerId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[InstrumentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[InstrumentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[Score]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[Score]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[ShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[SongShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[GameId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[InstrumentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[Score]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[StarScore]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[Percentage]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[PlayerId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[DifficultyId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[ScoreAddedDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[ScoreStageId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[InsertNewScoresBySongShortName].[@UnstagedRecords].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[PlayerName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[OnlineName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[PlatformId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[PlatformId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[ShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[SongShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[GameId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[InstrumentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[Score]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[StarScore]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[Percentage]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[PlayerId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[DifficultyId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[PlayerId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[PlayerId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[Score]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[Score]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[InstrumentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[InstrumentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[ObsoleteScore]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[ShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[ObsoleteScore]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[Ranking]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ScoreStage].[SongShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[UpdateRankings]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DynamicObjects">
+				<Entry>
+					<Element Type="ISqlDynamicColumnSource" Name="[dbo].[InsertNewScoresBySongShortName].[@UnstagedRecords]">
+						<Relationship Name="Columns">
+							<Entry>
+								<Element Type="ISql100SimpleColumn" Name="[dbo].[InsertNewScoresBySongShortName].[@UnstagedRecords].[Id]">
+									<Relationship Name="TypeSpecifier">
+										<Entry>
+											<Element Type="ISql90TypeSpecifier">
+												<Relationship Name="Type">
+													<Entry>
+														<References ExternalSource="BuiltIns" Name="[int]" />
+													</Entry>
+												</Relationship>
+											</Element>
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISqlDynamicColumnSource" Name="[dbo].[InsertNewScoresBySongShortName].[@ObsoleteScore]">
+						<Relationship Name="Columns">
+							<Entry>
+								<Element Type="ISql100SimpleColumn" Name="[dbo].[InsertNewScoresBySongShortName].[@ObsoleteScore].[Id]">
+									<Relationship Name="TypeSpecifier">
+										<Entry>
+											<Element Type="ISql90TypeSpecifier">
+												<Relationship Name="Type">
+													<Entry>
+														<References ExternalSource="BuiltIns" Name="[int]" />
+													</Entry>
+												</Relationship>
+											</Element>
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[InsertNewScoresBySongShortName].[@SongShortName]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="2" />
+				<Property Name="Length" Value="1767" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;CREATE PROCEDURE [dbo].[InsertNewScoresBySongShortName] &#xD;&#xA;@SongShortName VARCHAR(50)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[InsertNewSongs]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+BEGIN
+DECLARE @NewSongs TABLE
+(
+	Id INT
+)
+
+INSERT INTO @NewSongs(Id)
+SELECT SongStageId from SongStage ss WHERE NOT EXISTS(
+	SELECT 1 FROM Song s where s.ShortName = ss.ShortName)
+
+INSERT INTO Song(HmxSongId, ShortName, Artist, ArtistTr, Name, NameTr, Genre, Source, Rating, VocalParts, YearReleased, Decade, StartsWith, Cover, SongDisplayName, LastUpdatedDate)
+SELECT HmxSongId, ShortName, Artist, ArtistTr, Name, NameTr, Genre, Source, Rating, VocalParts, YearReleased, Decade, StartsWith, Cover, SongDisplayName, LastUpdatedDate
+FROM SongStage ss WHERE EXISTS(
+	SELECT 1 FROM @NewSongs ns WHERE ns.Id = ss.SongStageId)
+
+UPDATE ss SET ss.SongId = s.SongId
+FROM SongStage ss
+INNER JOIN Song s on s.ShortName = ss.ShortName
+
+DECLARE @SongId INT, @GuitarDifficulty INT, @BassDifficulty INT, @DrumsDifficulty INT
+DECLARE @VocalDifficulty INT, @KeysDifficulty INT, @ProGuitarDifficulty INT, @ProBassDifficulty INT
+DECLARE @ProDrumsDifficulty INT, @ProKeysDifficulty INT, @BandDifficulty INT
+DECLARE row_loop CURSOR FAST_FORWARD FOR
+	SELECT SongId, 
+		   GuitarDifficulty, 
+		   BassDifficulty, 
+		   DrumsDifficulty, 
+		   VocalDifficulty, 
+		   KeysDifficulty, 
+		   ProGuitarDifficulty, 
+		   ProBassDifficulty, 
+		   ProDrumsDifficulty, 
+		   ProKeysDifficulty,
+		   BandDifficulty FROM SongStage ss WHERE EXISTS(
+	SELECT 1 FROM @NewSongs ns WHERE ns.Id = ss.SongStageId)
+OPEN row_loop
+FETCH NEXT FROM row_loop INTO @SongId, @GuitarDifficulty, @BassDifficulty, @DrumsDifficulty, @VocalDifficulty, @KeysDifficulty, 
+							  @ProGuitarDifficulty, @ProBassDifficulty, @ProDrumsDifficulty, @ProKeysDifficulty, @BandDifficulty
+WHILE @@fetch_status = 0
+BEGIN
+	EXEC dbo.InsertSongDifficulty @SongId, 1, @GuitarDifficulty
+	EXEC dbo.InsertSongDifficulty @SongId, 2, @BassDifficulty
+	EXEC dbo.InsertSongDifficulty @SongId, 3, @DrumsDifficulty
+	EXEC dbo.InsertSongDifficulty @SongId, 4, @VocalDifficulty
+	EXEC dbo.InsertSongDifficulty @SongId, 5, @KeysDifficulty
+	EXEC dbo.InsertSongDifficulty @SongId, 6, @ProGuitarDifficulty
+	EXEC dbo.InsertSongDifficulty @SongId, 7, @ProBassDifficulty
+	EXEC dbo.InsertSongDifficulty @SongId, 8, @ProDrumsDifficulty
+	EXEC dbo.InsertSongDifficulty @SongId, 9, @ProKeysDifficulty
+	EXEC dbo.InsertSongDifficulty @SongId, 11, @BandDifficulty
+END
+CLOSE row_loop
+DEALLOCATE row_loop
+
+DELETE FROM SongStage
+
+EXEC dbo.CleanFailedSongAcquire
+END]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[InsertNewSongs].[@NewSongs].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[SongStageId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[ShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[ShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[HmxSongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[ShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[Artist]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[ArtistTr]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[NameTr]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[Genre]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[Source]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[Rating]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[VocalParts]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[YearReleased]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[Decade]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[StartsWith]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[Cover]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[SongDisplayName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[LastUpdatedDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[HmxSongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[ShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[Artist]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[ArtistTr]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[NameTr]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[Genre]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[Source]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[Rating]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[VocalParts]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[YearReleased]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[Decade]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[StartsWith]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[Cover]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[SongDisplayName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[LastUpdatedDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[InsertNewSongs].[@NewSongs].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[SongStageId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[ShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[ShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[GuitarDifficulty]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[BassDifficulty]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[DrumsDifficulty]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[VocalDifficulty]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[KeysDifficulty]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[ProGuitarDifficulty]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[ProBassDifficulty]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[ProDrumsDifficulty]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[ProKeysDifficulty]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongStage].[BandDifficulty]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[InsertSongDifficulty]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[CleanFailedSongAcquire]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DynamicObjects">
+				<Entry>
+					<Element Type="ISqlDynamicColumnSource" Name="[dbo].[InsertNewSongs].[@NewSongs]">
+						<Relationship Name="Columns">
+							<Entry>
+								<Element Type="ISql100SimpleColumn" Name="[dbo].[InsertNewSongs].[@NewSongs].[Id]">
+									<Relationship Name="TypeSpecifier">
+										<Entry>
+											<Element Type="ISql90TypeSpecifier">
+												<Relationship Name="Type">
+													<Entry>
+														<References ExternalSource="BuiltIns" Name="[int]" />
+													</Entry>
+												</Relationship>
+											</Element>
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="2" />
+				<Property Name="Length" Value="2468" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;CREATE PROCEDURE [dbo].[InsertNewSongs]&#xD;&#xA;&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[InsertSongDifficulty]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+BEGIN
+	SET NOCOUNT ON;
+	
+	INSERT INTO SongInstrumentDifficulty(SongId, InstrumentId, StarRank)
+	VALUES(@SongId, @InstrumentId, @Difficulty)
+	
+END]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[SongInstrumentDifficulty]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongInstrumentDifficulty].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongInstrumentDifficulty].[InstrumentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SongInstrumentDifficulty].[StarRank]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[InsertSongDifficulty].[@SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[InsertSongDifficulty].[@InstrumentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[InsertSongDifficulty].[@Difficulty]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[InsertSongDifficulty].[@SongId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[InsertSongDifficulty].[@InstrumentId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[InsertSongDifficulty].[@Difficulty]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="2" />
+				<Property Name="Length" Value="258" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;CREATE PROCEDURE [dbo].[InsertSongDifficulty]&#xD;&#xA;&#x9;@SongId INT,&#xD;&#xA;&#x9;@InstrumentId INT,&#xD;&#xA;&#x9;@Difficulty INT&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Table" Name="[dbo].[Instrument]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Instrument].[InstrumentId]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Instrument].[Description]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="10" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_Difficulty]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Difficulty].[DifficultyId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Difficulty]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_Game]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Game].[GameId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Game]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_Instrument]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Instrument].[InstrumentId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Instrument]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_Platform]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Platform].[PlatformId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Platform]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_Player]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Player].[PlayerId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Player]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_ScoreStage]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[ScoreStage].[ScoreStageId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ScoreStage]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_Song]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Song].[SongId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Song]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_SongInstrumentDifficulty]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[SongInstrumentDifficulty].[SongInstrumentDifficultyId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[SongInstrumentDifficulty]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_SongStage]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[SongStage].[SongStageId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[SongStage]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Table" Name="[dbo].[Platform]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Platform].[PlatformId]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Platform].[ConsoleName]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Platform].[ShortName]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="5" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Table" Name="[dbo].[Player]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Player].[PlayerId]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Player].[OnlineName]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Player].[PlatformId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Table" Name="[dbo].[Score]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Score].[ScoreId]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Score].[GameId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Score].[SongId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Score].[InstrumentId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Score].[Score]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Score].[StarScore]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Score].[Percentage]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Score].[PlayerId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Score].[DifficultyId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Score].[ObsoleteScore]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Score].[ScoreAddedDate]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Score].[Ranking]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Index" Name="[dbo].[Score].[IX_PlayerScores]">
+			<Property Name="IsClustered" Value="True" />
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Score].[PlayerId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Score].[SongId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Score].[InstrumentId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Score].[ScoreAddedDate]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="IndexedObject">
+				<Entry>
+					<References Name="[dbo].[Score]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Table" Name="[dbo].[ScoreStage]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ScoreStage].[ScoreStageId]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ScoreStage].[GameId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ScoreStage].[SongShortName]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ScoreStage].[InstrumentId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ScoreStage].[Score]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ScoreStage].[StarScore]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ScoreStage].[Percentage]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ScoreStage].[PlayerName]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ScoreStage].[PlatformId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ScoreStage].[DifficultyId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[SelectNextTopShortNames]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @ShortNameIds TABLE (Id VARCHAR(50))
+	
+	INSERT INTO @ShortNameIds
+    SELECT TOP 10 ShortName from dbo.Song order by Song.LastUpdatedDate
+    
+    UPDATE s SET LastUpdatedDate = GETDATE() FROM dbo.Song s WHERE EXISTS (SELECT Id FROM @ShortNameIds where Id = s.ShortName)
+    
+    SELECT Id from @ShortNameIds
+    
+END]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Song]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[ShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[LastUpdatedDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[LastUpdatedDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SelectNextTopShortNames].[@ShortNameIds].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[ShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[SelectNextTopShortNames].[@ShortNameIds].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DynamicObjects">
+				<Entry>
+					<Element Type="ISqlDynamicColumnSource" Name="[dbo].[SelectNextTopShortNames].[@ShortNameIds]">
+						<Relationship Name="Columns">
+							<Entry>
+								<Element Type="ISql100SimpleColumn" Name="[dbo].[SelectNextTopShortNames].[@ShortNameIds].[Id]">
+									<Relationship Name="TypeSpecifier">
+										<Entry>
+											<Element Type="ISql90TypeSpecifier">
+												<Property Name="Length" Value="50" />
+												<Relationship Name="Type">
+													<Entry>
+														<References ExternalSource="BuiltIns" Name="[varchar]" />
+													</Entry>
+												</Relationship>
+											</Element>
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="2" />
+				<Property Name="Length" Value="419" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;CREATE PROCEDURE [dbo].[SelectNextTopShortNames] &#xD;&#xA;&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Table" Name="[dbo].[Song]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[SongId]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[HmxSongId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[ShortName]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[Artist]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[ArtistTr]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[Name]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="100" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[NameTr]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="100" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[Genre]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[Source]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="15" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[Rating]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[VocalParts]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[YearReleased]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[Decade]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="6" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[StartsWith]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="1" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[char]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[Cover]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[SongDisplayName]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="100" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Song].[LastUpdatedDate]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Index" Name="[dbo].[Song].[IX_SongShortName]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Song].[ShortName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Filegroup">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="IndexedObject">
+				<Entry>
+					<References Name="[dbo].[Song]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Table" Name="[dbo].[SongInstrumentDifficulty]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongInstrumentDifficulty].[SongInstrumentDifficultyId]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongInstrumentDifficulty].[SongId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongInstrumentDifficulty].[InstrumentId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongInstrumentDifficulty].[StarRank]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[smallint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Table" Name="[dbo].[SongStage]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[SongStageId]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[HmxSongId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[ShortName]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[Artist]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[ArtistTr]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[Name]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[NameTr]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[Genre]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[Source]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="15" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[Rating]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[VocalDifficulty]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[smallint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[GuitarDifficulty]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[smallint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[ProGuitarDifficulty]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[smallint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[DrumsDifficulty]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[smallint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[ProDrumsDifficulty]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[smallint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[KeysDifficulty]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[smallint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[ProKeysDifficulty]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[smallint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[BassDifficulty]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[smallint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[ProBassDifficulty]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[smallint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[BandDifficulty]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[smallint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[VocalParts]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[YearReleased]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[Decade]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="6" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[StartsWith]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="1" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[char]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[Cover]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[SongDisplayName]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[LastUpdatedDate]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[SongStage].[SongId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100View" Name="[dbo].[TopScore]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="QueryScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+SELECT p.PlayerId ,p.OnlineName, sc.Score, i.InstrumentId, s.SongId, s.SongDisplayName, pl.PlatformId, pl.ConsoleName,
+    (select COUNT(*) + 1 from Score sc1 
+			 inner join Player p1 on sc1.PlayerId = p1.PlayerId
+			 where sc1.SongId = s.songId 
+			 and sc1.score > sc.Score 
+			 and sc1.InstrumentId = sc.InstrumentId) AS 'Ranking'
+FROM Score sc
+inner join Player p on sc.PlayerId = p.PlayerId
+inner join Instrument i on sc.InstrumentId = i.InstrumentId
+inner join Song s on sc.SongId = s.SongId
+inner join Platform pl on p.PlatformId = pl.PlatformId]]></Value>
+			</Property>
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql90ComputedColumn" Name="[dbo].[TopScore].[PlayerId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[Player].[PlayerId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql90ComputedColumn" Name="[dbo].[TopScore].[OnlineName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[Player].[OnlineName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql90ComputedColumn" Name="[dbo].[TopScore].[Score]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[Score].[Score]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql90ComputedColumn" Name="[dbo].[TopScore].[InstrumentId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[Instrument].[InstrumentId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql90ComputedColumn" Name="[dbo].[TopScore].[SongId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[Song].[SongId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql90ComputedColumn" Name="[dbo].[TopScore].[SongDisplayName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[Song].[SongDisplayName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql90ComputedColumn" Name="[dbo].[TopScore].[PlatformId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[Platform].[PlatformId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql90ComputedColumn" Name="[dbo].[TopScore].[ConsoleName]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[Platform].[ConsoleName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql90ComputedColumn" Name="[dbo].[TopScore].[Ranking]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="QueryDependencies">
+				<Entry>
+					<References Name="[dbo].[Score]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[PlayerId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[PlayerId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Instrument]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[InstrumentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Instrument].[InstrumentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Platform]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[PlatformId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Platform].[PlatformId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[PlayerId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[OnlineName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[Score]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Instrument].[InstrumentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[SongDisplayName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Platform].[ConsoleName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[PlayerId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[PlayerId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[Score]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[Score]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[InstrumentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[InstrumentId]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="4" />
+				<Property Name="Length" Value="601" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;&#xD;&#xA;CREATE VIEW [dbo].[TopScore]&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[UpdateRankings]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+BEGIN
+DECLARE @SongId INT
+SET @SongId = (SELECT SongId FROM Song WHERE ShortName = @SongShortName)
+
+UPDATE Score Set Ranking = RankCalc.Ranking
+FROM Score sc1 inner join
+	(SELECT	sc.ScoreId,
+			RANK() OVER(PARTITION BY s.SongId, p.PlatformId, i.InstrumentId ORDER BY Score Desc) as Ranking
+	FROM Score sc
+	INNER JOIN Song s on sc.SongId = s.SongId
+	INNER JOIN Instrument i on sc.InstrumentId = i.InstrumentId
+	INNER JOIN Player p on sc.PlayerId = p.PlayerId
+	INNER JOIN [Platform] pl on p.PlatformId = pl.PlatformId
+	WHERE ObsoleteScore = 0 and sc.SongId = @SongId) as RankCalc
+on sc1.ScoreId = RankCalc.ScoreId
+END]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[ShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[UpdateRankings].[@SongShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Instrument]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[InstrumentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Instrument].[InstrumentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[PlayerId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[PlayerId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Platform]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Player].[PlatformId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Platform].[PlatformId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[ScoreId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Instrument].[InstrumentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[Score]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[ObsoleteScore]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[ScoreId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[ScoreId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Score].[Ranking]" />
+				</Entry>
+				<Entry />
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[UpdateRankings].[@SongShortName]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="2" />
+				<Property Name="Length" Value="705" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;CREATE PROCEDURE [dbo].[UpdateRankings]&#xD;&#xA;@SongShortName VARCHAR(50)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[UpdateScoreAcquireDate]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+BEGIN
+DECLARE @SongId INT
+SET @SongId = (SELECT SongId FROM Song WHERE ShortName = @SongShortName)
+	UPDATE Song set LastUpdatedDate = GETDATE()
+	WHERE SongId = @SongId
+END]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[SongId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[ShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[UpdateScoreAcquireDate].[@SongShortName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[LastUpdatedDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Song].[SongId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[UpdateScoreAcquireDate].[@SongShortName]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="2" />
+				<Property Name="Length" Value="252" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;CREATE PROCEDURE [dbo].[UpdateScoreAcquireDate]&#xD;&#xA;&#x9;@SongShortName INT&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql90File" Name="[LeaderBoard]">
+			<Property Name="FileName" Value="D:\Data\LeaderBoard_Dev.mdf" />
+			<Property Name="Size" Value="1012736" />
+			<Property Name="SizeUnit" Value="3" />
+			<Property Name="FileGrowth" Value="1024" />
+			<Property Name="FileGrowthUnit" Value="3" />
+			<Relationship Name="Filegroup">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90File" Name="[LeaderBoard_log]">
+			<Property Name="FileName" Value="D:\Log\LeaderBoard_Dev_log.ldf" />
+			<Property Name="Size" Value="34283776" />
+			<Property Name="SizeUnit" Value="3" />
+			<Property Name="MaxSize" Value="2097152" />
+			<Property Name="IsUnlimited" Value="False" />
+			<Property Name="FileGrowth" Value="10" />
+			<Property Name="FileGrowthUnit" Value="1" />
+			<Property Name="IsLogFile" Value="True" />
+		</Element>
+	</Model>
+</DataSchemaModel>

@@ -1,0 +1,193 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Default">
+      <Item value="bool" priority="0" />
+      <Item value="true" priority="0" />
+      <Item value="while" priority="0" />
+      <Item value="try" priority="2" />
+      <Item value="failed" priority="1" />
+      <Item value="false" priority="1" />
+      <Item value="private" priority="0" />
+      <Item value="InstrumentHelper`0" priority="0" />
+      <Item value="PlatformHelper`0" priority="0" />
+      <Item value="Platforms`0" priority="0" />
+      <Item value="public" priority="1" />
+      <Item value="int" priority="1" />
+      <Item value="detail" priority="1" />
+      <Item value="platform" priority="0" />
+      <Item value="dataTable" priority="13" />
+      <Item value="score" priority="2" />
+      <Item value="string" priority="2" />
+      <Item value="song" priority="0" />
+      <Item value="DbHelper`0" priority="3" />
+      <Item value="Conn" priority="0" />
+      <Item value="catch" priority="3" />
+      <Item value="Exception`0" priority="2" />
+      <Item value="static" priority="0" />
+      <Item value="DataTable`0" priority="1" />
+      <Item value="new" priority="6" />
+      <Item value="DataTable" priority="0" />
+      <Item value="TableName" priority="0" />
+      <Item value="typeof" priority="3" />
+      <Item value="DateTime`0" priority="2" />
+      <Item value="return" priority="0" />
+      <Item value="dt" priority="0" />
+      <Item value="null" priority="2" />
+      <Item value="System" priority="1" />
+      <Item value="Environment`0" priority="2" />
+      <Item value="ex" priority="6" />
+      <Item value="finally" priority="0" />
+      <Item value="throw" priority="3" />
+      <Item value="Exception" priority="2" />
+      <Item value="Threading" priority="0" />
+      <Item value="Timer`0" priority="0" />
+      <Item value="Thread`0" priority="0" />
+      <Item value="TimeSpan" priority="0" />
+      <Item value="tryCount" priority="1" />
+      <Item value="if" priority="0" />
+      <Item value="SqlException" priority="0" />
+      <Item value="procedureName" priority="0" />
+      <Item value="parameters" priority="3" />
+      <Item value="ConstraintException`0" priority="0" />
+      <Item value="parameter" priority="0" />
+      <Item value="t" priority="0" />
+      <Item value="List" priority="0" />
+      <Item value="List&lt;Ranking&gt;" priority="0" />
+      <Item value="Ranking`0" priority="2" />
+      <Item value="WebZinc`0" priority="0" />
+      <Item value="WebZinc" priority="0" />
+      <Item value="url" priority="0" />
+      <Item value="instrument" priority="0" />
+      <Item value="scores" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:DownloadLeaderBoards.Model.ScoreDetail">
+      <Item value="PlayerName" priority="1" />
+      <Item value="PlatformId" priority="1" />
+      <Item value="SongName" priority="0" />
+      <Item value="SongShortName" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Data.DataTable">
+      <Item value="Columns" priority="4" />
+      <Item value="Rows" priority="3" />
+      <Item value="TableName" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Data.DataColumnCollection">
+      <Item value="Add`0" priority="4" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@DownloadLeaderBoards.Common.DbHelper">
+      <Item value="ExecuteStoredProcedure`0" priority="0" />
+      <Item value="CreateErrorLog`0" priority="0" />
+      <Item value="BulkInsert`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Data.DataRowCollection">
+      <Item value="Add`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Environment">
+      <Item value="MachineName" priority="1" />
+      <Item value="Exit`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.String">
+      <Item value="ToString`0" priority="0" />
+      <Item value="ToLower`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Exception">
+      <Item value="StackTrace" priority="0" />
+      <Item value="Message" priority="1" />
+      <Item value="InnerException" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.DateTime">
+      <Item value="Now" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Threading.Thread">
+      <Item value="Sleep`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Object">
+      <Item value="ToString`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Data.SqlClient.SqlParameter">
+      <Item value="ParameterName" priority="2" />
+      <Item value="Value" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.String">
+      <Item value="IsNullOrEmpty`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:DownloadLeaderBoards.Model.SongName">
+      <Item value="ShortName" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:DownloadLeaderBoards.Model.Ranking">
+      <Item value="Name" priority="0" />
+      <Item value="Score" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="1C654D69-5D44-40C9-99DF-BCF5BEAFB727/f:ScoreDetail.cs" caret="90" fromTop="2" />
+      <File id="155F8663-01DA-4F77-BC99-9694DA0F65CF/d:Schema Objects/d:Schemas/d:dbo/d:Programmability/d:Stored Procedures/f:SelectAllPlayers.proc.sql" caret="599" fromTop="21" />
+      <File id="155F8663-01DA-4F77-BC99-9694DA0F65CF/d:Schema Objects/d:Schemas/d:dbo/d:Programmability/d:Stored Procedures/f:SelectSongIdByShortName.proc.sql" caret="361" fromTop="11" />
+      <File id="155F8663-01DA-4F77-BC99-9694DA0F65CF/d:Schema Objects/d:Schemas/d:dbo/d:Programmability/d:Stored Procedures/f:AddNewPlayer.proc.sql" caret="38" fromTop="0" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:SongHelper.cs" caret="356" fromTop="11" />
+      <File id="3D6B22DF-3AAF-4836-A256-96EF8EA50B5D/d:Internal/f:FtpWebRequest.cs" caret="17491" fromTop="13" />
+      <File id="1C654D69-5D44-40C9-99DF-BCF5BEAFB727/f:Player.cs" caret="0" fromTop="0" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:WebsiteHelper.cs" caret="448" fromTop="9" />
+      <File id="AA3912E2-1704-4C17-98BA-29E05DBAB4D5/f:Program.cs" caret="580" fromTop="8" />
+      <File id="1C654D69-5D44-40C9-99DF-BCF5BEAFB727/f:Ranking.cs" caret="24" fromTop="0" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:PlayerHelper.cs" caret="1543" fromTop="34" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:ScoreHelper.cs" caret="616" fromTop="22" />
+      <File id="6798603F-9F89-47F9-A08B-9A424460CB9A/f:Program.cs" caret="1076" fromTop="37" />
+      <File id="6798603F-9F89-47F9-A08B-9A424460CB9A/f:App.config" caret="147" fromTop="2" />
+      <File id="AA3912E2-1704-4C17-98BA-29E05DBAB4D5/f:App.config" caret="147" fromTop="2" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:InstrumentHelper.cs" caret="381" fromTop="19" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:DbHelper.cs" caret="1928" fromTop="13" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:PlatformHelper.cs" caret="550" fromTop="24" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:DbHelper.cs" caret="5448" fromTop="24" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:DbHelper.cs" caret="13" fromTop="0" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:DbHelper.cs" caret="4908" fromTop="20" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:DbHelper.cs" caret="1325" fromTop="12" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:DbHelper.cs" caret="1031" fromTop="33" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:DbHelper.cs" caret="1976" fromTop="28" />
+      <File id="AA3912E2-1704-4C17-98BA-29E05DBAB4D5/f:Program.cs" caret="1607" fromTop="21" />
+      <File id="AA3912E2-1704-4C17-98BA-29E05DBAB4D5/f:Program.cs" caret="429" fromTop="2" />
+      <File id="AA3912E2-1704-4C17-98BA-29E05DBAB4D5/f:Program.cs" caret="48" fromTop="0" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:DbHelper.cs" caret="425" fromTop="7" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:DbHelper.cs" caret="627" fromTop="15" />
+      <File id="AA3912E2-1704-4C17-98BA-29E05DBAB4D5/f:Program.cs" caret="1611" fromTop="13" />
+      <File id="AA3912E2-1704-4C17-98BA-29E05DBAB4D5/f:Program.cs" caret="814" fromTop="21" />
+      <File id="1C654D69-5D44-40C9-99DF-BCF5BEAFB727/f:Ranking.cs" caret="136" fromTop="5" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:PlayerHelper.cs" caret="694" fromTop="24" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:PlayerHelper.cs" caret="317" fromTop="15" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:PlayerHelper.cs" caret="558" fromTop="27" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:WebsiteHelper.cs" caret="448" fromTop="9" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:PlayerHelper.cs" caret="386" fromTop="8" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:InstrumentHelper.cs" caret="640" fromTop="15" />
+      <File id="1C654D69-5D44-40C9-99DF-BCF5BEAFB727/f:Ranking.cs" caret="24" fromTop="0" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:PlayerHelper.cs" caret="1571" fromTop="47" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:PlayerHelper.cs" caret="1543" fromTop="34" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:PlatformHelper.cs" caret="48" fromTop="0" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:InstrumentHelper.cs" caret="381" fromTop="19" />
+      <File id="6798603F-9F89-47F9-A08B-9A424460CB9A/f:App.config" caret="147" fromTop="2" />
+      <File id="AA3912E2-1704-4C17-98BA-29E05DBAB4D5/f:App.config" caret="147" fromTop="2" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:PlatformHelper.cs" caret="911" fromTop="14" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:InstrumentHelper.cs" caret="381" fromTop="19" />
+      <File id="698777C2-DDE2-4D52-A66F-D46508F0CC0F/f:PlatformHelper.cs" caret="149" fromTop="8" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir>C:\Program Files\NUnit 2.5\bin\net-2.0\</NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+</Configuration>

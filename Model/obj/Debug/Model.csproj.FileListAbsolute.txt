@@ -1,0 +1,5 @@
+D:\Code\MyCode\CurrentLeaderBoards\Model\obj\Debug\ResolveAssemblyReference.cache
+D:\Code\MyCode\CurrentLeaderBoards\Model\bin\Debug\DownloadLeaderBoards.Model.dll
+D:\Code\MyCode\CurrentLeaderBoards\Model\bin\Debug\DownloadLeaderBoards.Model.pdb
+D:\Code\MyCode\CurrentLeaderBoards\Model\obj\Debug\DownloadLeaderBoards.Model.dll
+D:\Code\MyCode\CurrentLeaderBoards\Model\obj\Debug\DownloadLeaderBoards.Model.pdb

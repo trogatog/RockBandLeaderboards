@@ -1,0 +1,5 @@
+D:\Code\MyCode\CurrentLeaderBoards\SongName\bin\Debug\SongName.dll
+D:\Code\MyCode\CurrentLeaderBoards\SongName\bin\Debug\SongName.pdb
+D:\Code\MyCode\CurrentLeaderBoards\SongName\obj\Debug\ResolveAssemblyReference.cache
+D:\Code\MyCode\CurrentLeaderBoards\SongName\obj\Debug\SongName.dll
+D:\Code\MyCode\CurrentLeaderBoards\SongName\obj\Debug\SongName.pdb
