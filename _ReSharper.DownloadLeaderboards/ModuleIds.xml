@@ -1,8 +1,0 @@
-<Modules>
-  <Module PersistentId="698777C2-DDE2-4D52-A66F-D46508F0CC0F" ModuleId="Common" />
-  <Module PersistentId="3D6B22DF-3AAF-4836-A256-96EF8EA50B5D" ModuleId="WebZinc" />
-  <Module PersistentId="6798603F-9F89-47F9-A08B-9A424460CB9A" ModuleId="DownloadLeaderboards" />
-  <Module PersistentId="AA3912E2-1704-4C17-98BA-29E05DBAB4D5" ModuleId="UpdateSongList" />
-  <Module PersistentId="5F043558-FB4E-41D2-A059-9528D671E9D9" ModuleId="Enums" />
-  <Module PersistentId="1C654D69-5D44-40C9-99DF-BCF5BEAFB727" ModuleId="Model" />
-</Modules>
