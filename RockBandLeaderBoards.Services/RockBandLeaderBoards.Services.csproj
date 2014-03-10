@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1C654D69-5D44-40C9-99DF-BCF5BEAFB727}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RockBandLeaderBoards.Services</RootNamespace>
+    <AssemblyName>RockBandLeaderBoards.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Context\LeaderboardContext.cs" />
+    <Compile Include="Contracts\ILeaderboardRepository.cs" />
+    <Compile Include="Contracts\IRepository.cs" />
+    <Compile Include="Contracts\IRepositoryProvider.cs" />
+    <Compile Include="DbModels\Difficulty.cs" />
+    <Compile Include="DbModels\Game.cs" />
+    <Compile Include="DbModels\Instrument.cs" />
+    <Compile Include="DbModels\Platform.cs" />
+    <Compile Include="DbModels\Score.cs" />
+    <Compile Include="DbModels\Song.cs" />
+    <Compile Include="DbModels\SongInstrumentDifficulty.cs" />
+    <Compile Include="Enums\Difficulties.cs" />
+    <Compile Include="Enums\Instruments.cs" />
+    <Compile Include="Enums\Platforms.cs" />
+    <Compile Include="DbModels\Player.cs" />
+    <Compile Include="Migrations\201403100526492_InitialSeed.cs" />
+    <Compile Include="Migrations\201403100526492_InitialSeed.Designer.cs">
+      <DependentUpon>201403100526492_InitialSeed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403100531236_AddGameSeedData.cs" />
+    <Compile Include="Migrations\201403100531236_AddGameSeedData.Designer.cs">
+      <DependentUpon>201403100531236_AddGameSeedData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\SeedData\DifficultySeedData.cs" />
+    <Compile Include="Migrations\SeedData\GameSeedData.cs" />
+    <Compile Include="Migrations\SeedData\InstrumentSeedData.cs" />
+    <Compile Include="Migrations\SeedData\PlatformSeedData.cs" />
+    <Compile Include="ProjectModels\Ranking.cs" />
+    <Compile Include="ProjectModels\ScoreDetail.cs" />
+    <Compile Include="ProjectModels\SongName.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201403100526492_InitialSeed.resx">
+      <DependentUpon>201403100526492_InitialSeed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403100531236_AddGameSeedData.resx">
+      <DependentUpon>201403100531236_AddGameSeedData.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
